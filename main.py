@@ -59,17 +59,19 @@ icon_url = config["icon_url"]
 
 sendwebhook("RSShook Started", "RSShook has started. If you see this message, it means that the bot is working.", "https://github.com/bestadamdagoat/RSShook")
 
-# first request
-feed = feedparser.parse(rssfeed)
+while True:
+    # first request
+    feed = feedparser.parse(rssfeed)
 
-# store the modified
-previous_post = feed.entries[0].title
+    # store the modified
+    previous_post = feed.entries[0].title
 
-# check if new version exists
-feed_update = feedparser.parse(rssfeed)
+    # check if new version exists
+    feed_update = feedparser.parse(rssfeed)
 
-if feed_update.entries[0].title == previous_post:
-    print("No new post")
-else:
-    print("New post exists")
-    sendwebhook(feed.entries[0].title, feed.entries[0].description, feed.entries[0].link)
+    if feed_update.entries[0].title == previous_post:
+        print("No new post")
+    else:
+        print("New post exists")
+        sendwebhook(feed.entries[0].title, feed.entries[0].description, feed.entries[0].link)
+    time.sleep(checktime)
